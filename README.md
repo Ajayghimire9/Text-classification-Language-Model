@@ -18,7 +18,7 @@ Before running the code, make sure you have the following libraries installed:
 
 You can install these libraries using pip:
 
-```bash
+
 pip install pandas nltk seaborn matplotlib scikit-learn wordcloud xgboost torch transformers
 
 
