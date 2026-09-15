@@ -1,0 +1,37 @@
+text,label
+invoice amount is wrong,billing
+please refund this payment,billing
+charged twice for my order,billing
+billing date needs changing,billing
+where is my receipt,billing
+cancel the recurring payment,billing
+payment failed at checkout,billing
+tax amount looks incorrect,billing
+need a copy of invoice,billing
+card was charged again,billing
+request a billing adjustment,billing
+explain the subscription cost,billing
+application crashes at startup,technical
+cannot install this update,technical
+screen freezes after login,technical
+download fails with error,technical
+software does not open,technical
+network connection keeps dropping,technical
+page is not loading,technical
+fix the broken search,technical
+upload times out repeatedly,technical
+video playback is broken,technical
+system error during setup,technical
+the server is unavailable,technical
+reset my password please,account
+change my email address,account
+delete my user account,account
+update my profile name,account
+unable to sign in,account
+forgot my login details,account
+enable two factor authentication,account
+recover my old account,account
+verify my email address,account
+lock my compromised profile,account
+how to change username,account
+restore account access,account

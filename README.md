@@ -1,48 +1,34 @@
-# Text Classification with Machine Learning and BERT
+# TextBench
 
-Welcome to our GitHub repository dedicated to text classification leveraging the power of both traditional machine learning models and the cutting-edge BERT (Bidirectional Encoder Representations from Transformers) language model. This project encompasses a wide range of techniques, including data preprocessing, exploratory data analysis (EDA), feature engineering, model training, and evaluation, all aimed at providing a comprehensive understanding and implementation of text classification tasks.
+Reproducible text-classification benchmarks.
 
-## Prerequisites
+TextBench compares word and character TF-IDF classifiers on a labelled CSV. The command-line workflow makes the original notebook experiments repeatable without a GPU or an external model service.
 
-Ensure you have the following Python libraries installed to run the code smoothly:
+## Run locally
 
-- `pandas`
-- `nltk`
-- `re`
-- `seaborn`
-- `matplotlib`
-- `sklearn`
-- `wordcloud`
-- `xgboost`
-- `torch`
-- `transformers` (for BERT)
+Use Python 3.11 or newer in a virtual environment.
 
-You can easily install these dependencies with the following pip command:
+```bash
+pip install -r requirements-portfolio.txt
+python -m textbench.pipeline --data examples/texts.csv
+```
 
+## Design decisions
 
-## Usage
+Normalized duplicate text is removed before splitting; conflicting labels for the same text are rejected.
 
-To get started, clone this repository to your local machine or download the code files directly. Ensure you have your dataset in CSV format and specify the file path in the `file_path` variable within the code. You can run the code step-by-step or execute the entire script as per your preference.
+Candidate selection uses stratified cross-validation within the training partition. The final test partition is reserved for the selected model.
 
-## Contents
+A single fitted pipeline contains vocabulary and classifier. Reports include per-class metrics, a confusion matrix, dataset hash and model checksum.
 
-- **Data Loading and Exploration:** Initial steps to load the dataset, visualize its structure, and understand the data through summary statistics and category distributions. It also includes checks for missing values.
-- **Data Preprocessing:** This section covers cleaning the data by removing duplicates, tokenization, converting to lowercase, filtering non-alphabetic tokens and stopwords, and applying optional stemming and lemmatization.
-- **Exploratory Data Analysis (EDA):** We dive deeper into the data with visualizations such as word clouds, frequency distributions of top N words, text length distributions, and category-wise box plots for text length.
-- **Data Splitting:** The dataset is divided into training (70%), validation (15%), and testing (15%) sets.
-- **Feature Engineering:** Transformation of text data into numerical features using TF-IDF vectorization and label encoding for target labels.
-- **Model Training:** Training of various machine learning models including Random Forest, Logistic Regression, Support Vector Machine, Multinomial Naive Bayes, K-Nearest Neighbors, Gradient Boosting, XGBoost, and a Neural Network.
-- **Model Evaluation:** Evaluation of models based on accuracy and F1 score, including the generation of a confusion matrix for the best-performing model.
-- **BERT-based Language Model:** Implementation and fine-tuning of a BERT-based language model for text classification, including tokenization and encoding of the data.
+## Technology
 
-## References
+Python, pandas, scikit-learn, TF-IDF, joblib, DVC-compatible pipeline, GitHub Actions.
 
-For further reading and documentation on the tools and libraries used in this project:
+## Validation
 
-- [scikit-learn](https://scikit-learn.org/)
-- [XGBoost](https://xgboost.readthedocs.io/)
-- [Transformers (Hugging Face)](https://huggingface.co/transformers/)
-- [BERT Base German Cased](https://huggingface.co/bert-base-german-cased)
+Run `python -m pytest tests -q` from the repository root. CI runs the maintained test suite and lint checks. Tests use local fixtures or mocks and do not deploy cloud resources.
 
-We highly recommend referring to the code comments for detailed explanations of each step involved. Enjoy exploring text classification with the combined strength of machine learning and BERT!
+## Scope and limitations
 
+The included support-request examples are hand-written smoke-test fixtures, not a representative evaluation dataset. The maintained CLI uses linear classifiers; BERT experiments remain in the original notebook. Confidence scores are uncalibrated and the review threshold is configurable.
